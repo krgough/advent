@@ -35,29 +35,29 @@ PROGRAM = [1,0,0,3,1,1,2,3,1,3,4,3,1,5,0,3,2,1,9,19,1,19,5,23,1,13,23,27,
 
 STEP_SIZE = 4
 
-def process_instruction(index, program):
+def process_instruction(instruction_pointer, program):
     """ Process the instruction at the given index
 
-        index = pointer to code word
-        index+0 = op_code (1= add, 2=multiply, 99=halt)
-        index+1 = address of argument1
-        index+2 = address of argument2
-        index+3 = address of result
+        instruction_pointer = pointer to code word
+        instruction_pointer+0 = op_code (1= add, 2=multiply, 99=halt)
+        instruction_pointer+1 = address of argument1
+        instruction_pointer+2 = address of argument2
+        instruction_pointer+3 = address of result
 
     """
 
     halt_program = False
 
-    op_code = program[index]
+    op_code = program[instruction_pointer]
 
     if op_code == 99:
         halt_program = True
 
     elif op_code in [1,2]:
 
-        arg1 = program[program[index+1]]
-        arg2 = program[program[index+2]]
-        result_address = program[index+3]
+        arg1 = program[program[instruction_pointer+1]]
+        arg2 = program[program[instruction_pointer+2]]
+        result_address = program[instruction_pointer+3]
 
         if op_code == 1:
             program[result_address] = arg1 + arg2
@@ -76,29 +76,42 @@ def process_instruction(index, program):
 def run_program(program):
     """ Run the given program """
     halt = False
-    prog_index = 0
+    instruction_pointer = 0
 
     while not halt:
-        halt = process_instruction(prog_index, program)
-        prog_index += STEP_SIZE
+        halt = process_instruction(instruction_pointer, program)
+        instruction_pointer += STEP_SIZE
 
     return program
 
 def main():
     """ Main program """
 
+    # Test vectors
     assert run_program(TEST_1) == TEST_1_RESULT
     assert run_program(TEST_2) == TEST_2_RESULT
     assert run_program(TEST_3) == TEST_3_RESULT
     assert run_program(TEST_4) == TEST_4_RESULT
 
-    print("Tests passed")
-
     print("Running 1202 program...")
-    PROGRAM[1] = 12
-    PROGRAM[2] = 2
-    run_program(PROGRAM)
-    print(PROGRAM[0])
+    program = list(PROGRAM)
+    program[1] = 12
+    program[2] = 2
+    run_program(program)
+    print(program[0])
+
+    # Find the combination of noun and verb that give the result
+    wanted_result = 19690720
+    program = list(PROGRAM)
+    for noun in range(0,100):
+        for verb in range(0,100):
+            program = list(PROGRAM)
+            program[1] = noun
+            program[2] = verb
+            result = run_program(program)[0]
+            if result == wanted_result:
+                print(f"Noun and verb that give {wanted_result}: {noun}{verb}")
+                break
 
 if __name__ == "__main__":
     main()
