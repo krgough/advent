@@ -3,7 +3,7 @@ Created on 2 Dec 2019
 
 @author: Keith.Gough
 
-Advent of Code
+Advent of Code 2019 - Day2 Task
 
 '''
 
@@ -80,7 +80,7 @@ def run_program(program):
 
     while not halt:
         halt = process_instruction(prog_index, program)
-        prog_index += 4
+        prog_index += STEP_SIZE
 
     return program
 

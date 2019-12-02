@@ -2,6 +2,9 @@
 Created on 2 Dec 2019
 
 @author: Keith.Gough
+
+Advent of Code 2019 - Day 1 Task
+
 '''
 
 import math
@@ -9,6 +12,7 @@ import math
 FILENAME = 'day_1_data.txt'
 
 def load_data(filename):
+    """ Load the mass data file """
     data = []
     with open(filename, 'r') as file:
         for line in file:
@@ -16,7 +20,7 @@ def load_data(filename):
     return data
 
 def fuel_required(module_mass):
-    """ Calculate the fuel required to launch the module 
+    """ Calculate the fuel required to launch the module
 
         Fuel required to launch a given module is based on its mass.
         Specifically, to find the fuel required for a module, take its mass,
