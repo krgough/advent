@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 '''
 Created on 2 Dec 2019
 
@@ -33,16 +34,16 @@ def simple_fuel_required(module_mass):
 # def total_fuel_required(module_mass):
 #     """ Use a loop here and keep calling till we get zero """
 #     fuel_mass = simple_fuel_required(module_mass)
-# 
+#
 #     extra = fuel_mass
 #     while extra > 0:
 #         extra = simple_fuel_required(extra)
 #         fuel_mass += extra
-# 
+#
 #     return fuel_mass
 
 def total_fuel_required(module_mass):
-    """ Use regression to calculate total fuel required """
+    """ Use recursion to calculate total fuel required """
     fuel = simple_fuel_required(module_mass)
     if fuel <= 0:
         return fuel
