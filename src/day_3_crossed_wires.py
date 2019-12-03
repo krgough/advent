@@ -88,7 +88,9 @@ def find_intersections(wire_data):
     return intersections
 
 def time_to_position(tracks, point):
-    """ Find the time taken (number of steps) to a given point in the track """
+    """ Find the time taken (number of steps) to a given point in the track 
+        Num steps is same as the list index for the point
+    """
 
     index1 = [index for index, track_point in enumerate(tracks[0]) if track_point == point][0]
     index2 = [index for index, track_point in enumerate(tracks[1]) if track_point == point][0]
