@@ -60,7 +60,7 @@ def main():
     assert simple_fuel_required(100756) == 33583
 
     assert total_fuel_required(1969) == 966
-    print ('Tests pass')
+    print('Tests pass')
 
     # Calculate part1 answer
     simple_fuel = []

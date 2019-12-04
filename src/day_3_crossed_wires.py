@@ -15,8 +15,8 @@ TEST_1B = ['U7', 'R6', 'D4', 'L4']
 TEST_1 = [TEST_1A, TEST_1B]
 TEST_1_RESULT = 6
 
-TEST_2A = ['R75','D30','R83','U83','L12','D49','R71','U7','L72']
-TEST_2B = ['U62','R66','U55','R34','D71','R55','D58','R83']
+TEST_2A = ['R75', 'D30', 'R83', 'U83', 'L12', 'D49', 'R71', 'U7', 'L72']
+TEST_2B = ['U62', 'R66', 'U55', 'R34', 'D71', 'R55', 'D58', 'R83']
 TEST_2 = [TEST_2A, TEST_2B]
 TEST_2_RESULT = 159
 TEST_2_SHORT_TIME = 610
@@ -88,7 +88,7 @@ def find_intersections(wire_data):
     return intersections
 
 def time_to_position(tracks, point):
-    """ Find the time taken (number of steps) to a given point in the track 
+    """ Find the time taken (number of steps) to a given point in the track
         Num steps is same as the list index for the point
     """
 
