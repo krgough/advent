@@ -6,6 +6,7 @@ Created on 4 Dec 2019
 Advent of Code 2019 - Day4 Task
 
 '''
+from collections import Counter
 
 def check_pin(pin):
     """ Return True if:
@@ -27,10 +28,10 @@ def check_pin(pin):
     pin_list = [int(digit) for digit in str(pin)]
     zipped = list(zip(pin_list, pin_list[1:]))
 
-    always_increase = all([i[0] <= i[1] for i in zipped])
+    non_decreasing = all([i[0] <= i[1] for i in zipped])
     repeat_digit = any([i[0] == i[1] for i in zipped])
 
-    return always_increase & repeat_digit & (len(pin_list) == 6)
+    return non_decreasing & repeat_digit & (len(pin_list) == 6)
 
 def find_pin_candidates(from_pin, to_pin):
     """ Find pin candidates from the given range """
@@ -41,6 +42,27 @@ def find_pin_candidates(from_pin, to_pin):
     return candidates
 
 def exclude_repeats(candidates):
+    """ Find candidates that have at least one digit that only
+        repeats twice in the pin.
+
+        Since we know the candidates are ordered we know that any repeating
+        digit is already adjacent to its other instances.  So if we simply
+        count occurences and confirm that we have only one digit that has
+        an occurence of 2, then that is a valid candidate.
+    """
+    reduced_candidate_list = []
+    for candidate in candidates:
+
+        cand_str = str(candidate)
+        digit_count = Counter(cand_str)
+
+        # Check we have at least one digit that has a count of 2
+        if 2 in digit_count.values():
+            reduced_candidate_list.append(candidate)
+
+    return reduced_candidate_list
+
+def exclude_repeats_old(candidates):
     """ Find candidates that have at least one digit that only
         repeats twice in the pin.
 
