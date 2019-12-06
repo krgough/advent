@@ -14,7 +14,7 @@ to calculate total number of orbits.
 
 e.g.
 
-        G - H - X   J - K - YOU
+        G - H       J - K - YOU
        /           /
 COM - B - C - D - E - F
                \
@@ -149,8 +149,6 @@ def main():
 
     # Part 2
     print(f"Count of orbital transfers from SAN to YOU = {transfer_count(data)}")
-    # Tests 307
-
 
 if __name__ == "__main__":
     main()
