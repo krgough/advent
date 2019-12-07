@@ -62,7 +62,6 @@ def next_level_bodies(bodies, orb_dict):
         if orb_dict[body]:
             body_list += orb_dict[body]
     return body_list
-
 def build_orb_dict(orb_list):
     """ Build the orb dict of lists
         Lists of bodies in direct orbit around any planet
@@ -82,7 +81,6 @@ def build_orb_dict(orb_list):
         if body not in orb_dict:
             orb_dict[body] = None
     return orb_dict
-
 def orbit_count(orb_list):
     """ sandbox """
 
@@ -98,14 +96,12 @@ def orbit_count(orb_list):
             level += 1
 
     return orb_count
-
 def find_key(value, my_dict):
     """ Return the key where the value is stored """
     for key in my_dict:
         if value in my_dict[key]:
             return key
     return None
-
 def backward_route(start_node, end_node, orb_dict):
     """ Find a list moving backward towards COM from start_node """
     route_list = []
@@ -114,7 +110,6 @@ def backward_route(start_node, end_node, orb_dict):
         node = find_key(node, orb_dict)
         route_list.append(node)
     return route_list
-
 def transfer_count(orb_list):
     """ Count orbital transfers between SAN and YOU """
     orb_dict = build_orb_dict(orb_list)
