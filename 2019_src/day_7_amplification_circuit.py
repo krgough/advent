@@ -18,7 +18,23 @@ Input to Amp A is 0.
 0 ->| Amp A |->| Amp B |->| Amp C |->| Amp D |->| Amp E |-> (to thrusters)
     O-------O  O-------O  O-------O  O-------O  O-------O
 
-Problem - How to generate the set of phase combinations to try?
+What is the combination of phase settings that gives max output
+
+
+Part 2: Amps are now setup in a feedback loop
+Phase settings are in the range 5-9
+Input to Amp A is 0.
+
+What is the combination of phase settings that gives max output
+
+      O-------O  O-------O  O-------O  O-------O  O-------O
+0 -+->| Amp A |->| Amp B |->| Amp C |->| Amp D |->| Amp E |-.
+   |  O-------O  O-------O  O-------O  O-------O  O-------O |
+   |                                                        |
+   '--------------------------------------------------------+
+                                                            |
+                                                            v
+                                                     (to thrusters)
 
 
 '''
@@ -35,7 +51,7 @@ PHASE_VALUES_1 = [0, 1, 2, 3, 4]
 PHASE_VALUES_2 = [5, 6, 7, 8, 9]
 
 # Permutations can be generated using Heap's Algorithm (see wikipedia) but luckily Python
-# dies this for us...
+# does this for us...
 
 PHASE_VALUE_PERMUTATIONS_1 = list(itertools.permutations(PHASE_VALUES_1))
 PHASE_VALUE_PERMUTATIONS_2 = list(itertools.permutations(PHASE_VALUES_2))
@@ -44,16 +60,14 @@ def run_permutation(program, phase_values):
     """ Calculate the output from the amplifier bank for the
         given set of phase settings
     """
-
     next_input_data = 0
 
-    for i in range(0,5):
+    for i in range(0, 5):
         computer = icc.IntCodeComputer(program, [phase_values[i], next_input_data])
         computer.run_program()
         next_input_data = computer.result[-1]
 
     return next_input_data
-
 def find_max_output():
     """ Find the maximum amplifier output  for all the given phase settings
 
@@ -122,7 +136,6 @@ def run_feedback_loop(phase_settings):
         thd.join()
 
     return amp_pool[4].result
-
 def find_max_feedback_output():
     """ Find max amplifier output with feedback """
     max_output = 0
@@ -133,7 +146,7 @@ def find_max_feedback_output():
             max_output = result[-1]
             max_phase_settings = phase_settings
 
-    print('Part 2:')
+    print('\nPart 2:')
     print(f'Max Feedback Output = {max_output}, Max Feedback Phase Settings = {max_phase_settings}')
 
 if __name__ == "__main__":
