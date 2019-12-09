@@ -2,6 +2,9 @@
 Created on 8 Dec 2019
 
 @author: Keith.Gough
+
+Advent of Code 2019 - Day 8: Space Image Format
+
 '''
 
 import re
