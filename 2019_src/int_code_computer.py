@@ -228,6 +228,7 @@ class IntCodeComputer():
 
         while not self.halt_status:
             self.process_instruction()
+        LOGGER.debug('Exit thread')
 
 def run_computer(program, input_data):
     """ run basic int code computer tests """
