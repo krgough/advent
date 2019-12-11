@@ -10,7 +10,7 @@ Advent of Code 2019 - Day 1 Task
 
 import math
 
-FILENAME = 'day_1_data.txt'
+FILENAME = 'day_01_data.txt'
 
 def load_data(filename):
     """ Load the mass data file """

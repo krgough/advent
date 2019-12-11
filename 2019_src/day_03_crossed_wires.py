@@ -118,7 +118,7 @@ def main():
     assert find_shortest_time_to_intersect(TEST_2) == TEST_2_SHORT_TIME
 
     # Load the data for each wire into a list
-    filename = 'day_3_data.txt'
+    filename = 'day_03_data.txt'
     wire_data = load_data(filename)
 
     closest_intersection = find_closest_intersections(wire_data)

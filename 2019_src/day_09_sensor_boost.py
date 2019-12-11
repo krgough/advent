@@ -23,7 +23,7 @@ import int_code_computer as icc
 
 def main():
     """ Main Program """
-    program = icc.load_data('day_9_data.txt')
+    program = icc.load_data('day_09_data.txt')
 
     print("Part 1: Boost keycode:")
     input_data = [1]

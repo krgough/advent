@@ -73,7 +73,7 @@ def find_max_output():
 
         Max Output = 262086, Max Phase Settings = (2, 1, 4, 0, 3)
     """
-    program = icc.load_data("day_7_data.txt")
+    program = icc.load_data("day_07_data.txt")
 
     max_output = 0
     max_phase = None

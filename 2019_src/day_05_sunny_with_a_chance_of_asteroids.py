@@ -163,12 +163,12 @@ def main():
     assert run_program(list(TEST_3), 9)[-1] == 1001
 
     # Part1
-    program = load_data('day_5_data.txt')
+    program = load_data('day_05_data.txt')
     result = run_program(program, input_data=AC_UNIT_ID)
     print(f"Diagnostic code for system ID {AC_UNIT_ID}: {result}")
 
     # Part2
-    program = load_data('day_5_data.txt')
+    program = load_data('day_05_data.txt')
     result = run_program(program, input_data=TRC_UNIT_ID)
     print(f"\nDiagnostic code for system ID {TRC_UNIT_ID}: {result}")
 

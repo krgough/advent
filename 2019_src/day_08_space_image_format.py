@@ -95,7 +95,7 @@ def layer_checksum(raw_img):
 
 def main():
     """ Main Program """
-    raw_img = load_file('day_8_data.txt')[0]
+    raw_img = load_file('day_08_data.txt')[0]
 
     # Part 1
     layer_checksum(raw_img)

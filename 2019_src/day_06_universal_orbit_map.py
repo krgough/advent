@@ -137,7 +137,7 @@ def main():
     assert transfer_count(TEST_1) == 3
 
     # Load data
-    data = load_file('day_6_data.txt')
+    data = load_file('day_06_data.txt')
 
     # Part 1
     print(f"Total number of orbital counts in dataset  = {orbit_count(data)}")
