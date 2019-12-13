@@ -24,6 +24,7 @@ opCode 9: adjust relative_base.  Takes one argument, which is the new relative_b
 
 import queue
 import logging
+import time
 
 LOGGER = logging.getLogger(__name__)
 
@@ -88,6 +89,7 @@ class IntCodeComputer():
             self.output = queue.Queue()
 
         self.halt_status = False
+        self.waiting = False
         self.result = []
 
     def get_arg(self, pointer, address_mode):
@@ -183,6 +185,13 @@ class IntCodeComputer():
                 # Input uses arg 1 for result address so re-calc the result address
                 result_address = self.get_result_address(self.instruction_pointer + 1,
                                                          int(full_op_code[2]))
+
+                while self.input.empty():
+                    time.sleep(0.001)
+                    self.waiting = True
+
+                self.waiting = False
+
                 self.program[result_address] = self.input.get()
                 LOGGER.debug(self.program.get(result_address, 0))
                 self.instruction_pointer += 2
