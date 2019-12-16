@@ -7,8 +7,11 @@ Created on 14 Dec 2019
 Advent of Code 2019 - Day 14: Space Stoichiometry
 
 '''
+
+import logging
 from math import ceil
 
+LOGGER = logging.getLogger(__name__)
 
 TEST_1 = """
 157 ORE => 5 NZVS
@@ -64,11 +67,11 @@ def make_product(qty, prod, recipes, counts):
     if prod == 'ORE':
         return
 
-    print(f"Recipe = {recipes[prod]}")
+    LOGGER.debug(f"Recipe = {recipes[prod]}")
 
     # What product are we short of
     missing = qty - counts[prod]
-    print(f"Missing {missing} units of {prod}")
+    LOGGER.debug(f"Missing {missing} units of {prod}")
 
     # Work out how many iterations of the recipe we need to run
     if missing > 0:
@@ -80,7 +83,7 @@ def make_product(qty, prod, recipes, counts):
     # Do this n times as required to make the qty of the product
     for ingredient in recipes[prod][0]:
         ing_qty = ingredient[0] * runs
-        print(f"To make {qty} {prod} we need {ing_qty} {ingredient[1]}.")
+        LOGGER.debug(f"To make {qty} {prod} we need {ing_qty} {ingredient[1]}.")
         # Produce that ingredient and consume some of ingredients
         make_product(ingredient[0] * runs,
                      ingredient[1],
@@ -95,22 +98,52 @@ def calculate_ore_for_x_fuel(fuel_qty):
     """ Calculate ORE required for x batches of fuel """
     recipes, counts = load_file('day_14.txt')
     make_product(fuel_qty, 'FUEL', recipes, counts)
-    print(counts)
+    LOGGER.debug(counts)
     return -counts['ORE']
+
+def binary_search(my_func, wanted, lower, upper):
+    """ Do a binary search for the wanted value """
+    not_found = True
+
+    while not_found:
+
+        # Check upper bound
+        res = my_func(upper)
+        if res < wanted:
+            upper = upper * 2
+
+        # Do the binary split thing
+        else:
+
+            mid = (upper + lower) // 2
+            res = my_func(mid)
+
+            if res == wanted:
+                return mid
+
+            if upper - lower == 1:
+                return lower
+
+            if res < wanted:
+                lower = mid
+            else:
+                upper = mid
+
+        #print(lower, upper, res)
 
 def main():
     """ Main Program """
 
     # Part 1
     ore = calculate_ore_for_x_fuel(1)
-    print(f"Part 1:  Ore for one unit of fuel = {ore}")
+    print(f"Part 1: Ore for one unit of fuel = {ore}")
 
-    ore = calculate_ore_for_x_fuel(4200533)
-    if ore > 1000000000000:
-        print('SMALLER')
-    else:
-        print("LARGER")
+    # Calculate how much Fuel we get for a trillion tons of ORE
+    wanted = 1000000000000
+    fuel = binary_search(calculate_ore_for_x_fuel, wanted, 1, 100)
+    print(f"Part 2: Binary Search for fuel output given 1Trillion tons of ore.  Fuel = {fuel}")
 
 if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
     main()
                  
